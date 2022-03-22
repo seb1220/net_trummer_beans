@@ -7,10 +7,6 @@ package dijkstra;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 /**
  *
@@ -18,7 +14,7 @@ import java.nio.file.Paths;
  */
 public class DrawPanel extends javax.swing.JPanel {
     
-    private NodeManagment nm;
+    private NodeManagement nm;
     private Node connecting;
     private int x;
     private int y;
@@ -29,7 +25,7 @@ public class DrawPanel extends javax.swing.JPanel {
      */
     public DrawPanel() {
         initComponents();
-        nm = new NodeManagment();
+        nm = new NodeManagement();
     }
 
     /**

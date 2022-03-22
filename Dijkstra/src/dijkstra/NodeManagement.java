@@ -8,17 +8,16 @@ import java.awt.Graphics;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Set;
 
 /**
  *
  * @author sebas
  */
-public class NodeManagment implements Serializable {
+public class NodeManagement implements Serializable {
     private ArrayList<Node> nodes;
     private int counter = 0; // 64
 
-    public NodeManagment() {
+    public NodeManagement() {
         nodes = new ArrayList<Node>();
     }
     
