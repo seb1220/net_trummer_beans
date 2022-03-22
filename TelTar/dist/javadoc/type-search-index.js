@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"teltar","l":"Tarif"},{"p":"teltar","l":"Tarif_A"},{"p":"teltar","l":"Tarif_B"},{"p":"teltar","l":"Tarifliste"},{"p":"teltar","l":"TelTar"}];updateSearchResults();
