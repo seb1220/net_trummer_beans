@@ -24,7 +24,7 @@ public class NodeManagement implements Serializable {
     public void add (int x, int y) {
         //String desc = "A";
         if (!isNearNode(x, y))
-            nodes.add(new Node(x, y, /*((char)++counter) + ""*/++counter + ""));
+            nodes.add(new Node(x, y, /*((char)++counter) + ""*/++counter + "", false));
     }
     
     public boolean isNearNode(int x, int y) {

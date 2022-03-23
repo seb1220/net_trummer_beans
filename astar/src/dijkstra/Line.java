@@ -10,7 +10,7 @@ public class Line {
     Line(Node n1, Node n2) {
         nb = new Node[]{n1, n2};
         setHitbox(new Node((int) (n1.getX() + (n2.getX() - n1.getX()) * 0.5),
-                (int) (n1.getY() + (n2.getY() - n1.getY()) * 0.5), getWeight() + ""));
+                (int) (n1.getY() + (n2.getY() - n1.getY()) * 0.5), getWeight() + "", true));
         setWeight(5);
     }
 

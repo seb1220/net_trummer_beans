@@ -20,7 +20,7 @@ public class LineManagement {
             if (l.getHitbox().isInNode(x, y))
                 tmp.add(l);
         }
-        if (tmp.get(0) != null)
+        if (tmp.size() > 0)
             return tmp;
         return null;
         /*

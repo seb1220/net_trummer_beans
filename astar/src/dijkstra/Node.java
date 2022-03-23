@@ -27,10 +27,12 @@ public class Node implements Serializable {
     private boolean active;
     private Node[] path;
     private Node target;
+
+    private boolean weiss;
     
     private boolean selected;
 
-    public Node(int x, int y, String desc) {
+    public Node(int x, int y, String desc, boolean weiss) {
         setX(x);
         setY(y);
         setDesc(desc);
@@ -39,6 +41,15 @@ public class Node implements Serializable {
         setActive(false);
         setSelected(false);
         setPath(null);
+        setWeiss(weiss);
+    }
+
+    public void setWeiss(boolean weiss) {
+        this.weiss = weiss;
+    }
+
+    public boolean isWeiss() {
+        return weiss;
     }
 
     public void setTarget(Node target) {
@@ -129,7 +140,8 @@ public class Node implements Serializable {
             g.setColor(Color.GREEN);
         if (isSelected())
             g.setColor(Color.RED);
-        g.drawOval(x-RADIUS, y-RADIUS, RADIUS*2, RADIUS*2);
+        if (!isWeiss())
+            g.drawOval(x-RADIUS, y-RADIUS, RADIUS*2, RADIUS*2);
         g.setColor(Color.BLACK);
         int width = g.getFontMetrics().stringWidth(getDesc());
         int height = g.getFontMetrics().getAscent() / 2;
