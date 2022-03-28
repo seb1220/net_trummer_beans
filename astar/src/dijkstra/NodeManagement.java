@@ -54,8 +54,8 @@ public class NodeManagement implements Serializable {
         nodes.forEach(n -> n.setTarget(end));
         
         Node nextup = start;
-        
-        while (!end.isActive()) {
+        boolean tot = true;
+        while (end.isActive() || tot) {
             //nodes.forEach(n -> System.out.println(n.getDesc() + " " + n.getHop()));
             nextup = findLowestHop();
             if (nextup == null) {
@@ -64,7 +64,8 @@ public class NodeManagement implements Serializable {
             }
             //System.out.println(nextup.getDesc());
             nextup.getSuccessorsDone();
-
+            if (end.isActive())
+                tot = false;
         }
         String path = "";
         Node pre = end.getPredecessor();

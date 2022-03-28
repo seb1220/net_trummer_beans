@@ -133,8 +133,14 @@ public class Node implements Serializable {
     }
     
     public void paint(Graphics g) {
-        g.setColor(Color.WHITE);
-        g.fillOval(x-RADIUS, y-RADIUS, RADIUS*2, RADIUS*2);
+        if (!isWeiss()) {
+            g.setColor(Color.WHITE);
+            g.fillOval(x-RADIUS, y-RADIUS, RADIUS*2, RADIUS*2);
+        } else {
+            g.setColor(new Color(214, 217, 223));
+            g.fillOval(x-RADIUS/2, y-RADIUS/2, RADIUS*1, RADIUS*1);
+        }
+
         g.setColor(Color.BLACK);
         if (getPath() != null)
             g.setColor(Color.GREEN);
