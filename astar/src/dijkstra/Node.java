@@ -42,6 +42,7 @@ public class Node implements Serializable {
         setSelected(false);
         setPath(null);
         setWeiss(weiss);
+        setHop(1000000);
     }
 
     public void setWeiss(boolean weiss) {
@@ -104,8 +105,8 @@ public class Node implements Serializable {
         this.selected = selected;
     }
 
-    public void setHop(int weight) {
-        this.hop = weight;
+    public void setHop(int hop) {
+        this.hop = hop;
     }
 
     public void setPredecessor(Node predecessor) {
@@ -117,10 +118,10 @@ public class Node implements Serializable {
     }
 
     public double getHop() {
-        return hop + Math.sqrt(((getX() - getTarget().getX()) * (getX() - getTarget().getX())) + ((getY() - getTarget().getY()) * (getY() - getTarget().getY())));
+        return getNoDistance() + (Math.sqrt(((getX() - getTarget().getX()) * (getX() - getTarget().getX())) + ((getY() - getTarget().getY()) * (getY() - getTarget().getY())))) * 0.04;
     }
 
-    public double getNoDisance() {
+    public int getNoDistance() {
         return hop;
     }
 
@@ -197,14 +198,22 @@ public class Node implements Serializable {
     public boolean getSuccessorsDone() {
         boolean any = false;
         for (Line n : lines) {
-            if (n.getNb()[1].getNoDisance() > getNoDisance()) {
+            if (n.getNb()[1].getNoDistance() > getNoDistance()) {
                 n.getNb()[1].setActive(true);
                 n.getNb()[1].setPredecessor(this);
-                n.getNb()[1].setHop(hop + n.getWeight());
+                n.getNb()[1].setHop((int) (getNoDistance() + n.getWeight()));
                 any = true;
             }
         }
         setActive(false);
         return any;
+    }
+
+    public ArrayList<Node> getSuccessors() {
+        ArrayList<Node> nbs = new ArrayList<Node>();
+        for (Line n : lines) {
+            nbs.add(n.getNb()[1]);
+        }
+        return nbs;
     }
 }

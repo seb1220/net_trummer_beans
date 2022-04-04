@@ -5,6 +5,7 @@
 package dijkstra;
 
 import java.awt.Graphics;
+import java.awt.desktop.ScreenSleepEvent;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -15,6 +16,10 @@ import java.util.Comparator;
  */
 public class NodeManagement implements Serializable {
     private ArrayList<Node> nodes;
+
+    private ArrayList<Node> open_lst;
+    private ArrayList<Node> closed_lst;
+
     private int counter = 0; // 64
 
     public NodeManagement() {
@@ -48,25 +53,68 @@ public class NodeManagement implements Serializable {
         clearEnt();
         
         start.setActive(true);
-        start.setPredecessor(null);
+        start.setPredecessor(start);
         start.setHop(0);
 
         nodes.forEach(n -> n.setTarget(end));
+
+        open_lst = new ArrayList<Node>();
+        closed_lst = new ArrayList<Node>();
+
+        open_lst.add(start);
+
+        while (open_lst.size() > 0) {
+            Node n = null;
+            for (Node v : open_lst)
+                if (n == null || v.getHop() < n.getHop())
+                    n = v;
+
+            if (n == end || n == null) {
+                continue;
+            } else {
+                for (Node m : n.getSuccessors()) {
+                    if (!open_lst.contains(m) && !closed_lst.contains(m)) {
+                        open_lst.add(m);
+                        m.setPredecessor(n);
+                        m.setHop(n.getNoDistance());
+                    } else {
+                        if (m.getNoDistance() > n.getHop()) {
+                            
+                        }
+                    }
+                }
+            }
+        }
+        /*
+        nodes.forEach(n -> n.setTarget(end));
         
-        Node nextup = start;
-        boolean tot = true;
-        while (end.isActive() || tot) {
+        Node nextup;
+        boolean activator = true;
+        while (end.isActive() || activator) {
             //nodes.forEach(n -> System.out.println(n.getDesc() + " " + n.getHop()));
             nextup = findLowestHop();
+            open_lst.add(nextup);
             if (nextup == null) {
                 System.out.println("No possible route found");
                 return;
             }
-            //System.out.println(nextup.getDesc());
+            System.out.println("Nextup: " + nextup.getDesc());
+            for (Node n : nodes) {
+                System.out.println("----");
+                System.out.println(n.getDesc());
+                System.out.println(n.getNoDistance());
+                System.out.println(n.getHop());
+                if (n.getPredecessor() != null)
+                    System.out.println(n.getPredecessor().getDesc());
+                else
+                    System.out.println("null");
+            }
+            System.out.println("---------------");
             nextup.getSuccessorsDone();
             if (end.isActive())
-                tot = false;
+                activator = false;
         }
+        */
         String path = "";
         Node pre = end.getPredecessor();
         Node oldPre = end;

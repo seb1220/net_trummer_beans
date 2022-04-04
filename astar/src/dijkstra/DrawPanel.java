@@ -93,10 +93,6 @@ public class DrawPanel extends javax.swing.JPanel {
                 }
             //nm.getSelectedNodes().forEach(n -> System.out.println(n.getDesc()));
             //System.out.println("Size: " + nm.getSelectedNodes().size());
-            
-            if (nm.getSelectedNodes().size() == 2) {
-                nm.findPath(nm.getSelectedNodes().get(0), nm.getSelectedNodes().get(1));
-            }
 
             if (lm.isInLine(evt.getX(), evt.getY()) != null) {
                 System.out.println("fick netbeans");
@@ -105,6 +101,10 @@ public class DrawPanel extends javax.swing.JPanel {
                 //lm.isInLine(evt.getX(), evt.getY()).setWeight(lm.isInLine(evt.getX(), evt.getY()).getWeight() + 1);
                 //lm.isInLine(evt.getX(), evt.getY()).setWeight(10);
                 repaint();
+            }
+
+            if (nm.getSelectedNodes().size() == 2) {
+                nm.findPath(nm.getSelectedNodes().get(0), nm.getSelectedNodes().get(1));
             }
         }
     }//GEN-LAST:event_formMousePressed
