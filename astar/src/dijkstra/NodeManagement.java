@@ -76,10 +76,10 @@ public class NodeManagement implements Serializable {
                     if (!open_lst.contains(m) && !closed_lst.contains(m)) {
                         open_lst.add(m);
                         m.setPredecessor(n);
-                        m.setHop(n.getNoDistance());
+                        m.setHop(n.getNoDistance()); // wrong
                     } else {
                         if (m.getNoDistance() > n.getHop()) {
-                            
+                            // like above wrong thing
                         }
                     }
                 }
