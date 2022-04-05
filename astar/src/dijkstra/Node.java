@@ -216,4 +216,13 @@ public class Node implements Serializable {
         }
         return nbs;
     }
+
+    public int getWeightBetween(Node m) {
+        for (Line n : lines) {
+            if (n.getNb()[1] == m) {
+                return n.getWeight();
+            }
+        }
+        return 0;
+    }
 }

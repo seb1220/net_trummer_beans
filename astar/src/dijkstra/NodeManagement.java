@@ -69,21 +69,45 @@ public class NodeManagement implements Serializable {
                 if (n == null || v.getHop() < n.getHop())
                     n = v;
 
-            if (n == end || n == null) {
-                continue;
+            if (n == end || !nodes.contains(n)) {
+
             } else {
                 for (Node m : n.getSuccessors()) {
                     if (!open_lst.contains(m) && !closed_lst.contains(m)) {
                         open_lst.add(m);
                         m.setPredecessor(n);
-                        m.setHop(n.getNoDistance()); // wrong
+                        m.setHop(n.getNoDistance() + n.getWeightBetween(m)); // wrong, or not
                     } else {
-                        if (m.getNoDistance() > n.getHop()) {
-                            // like above wrong thing
+                        if (m.getNoDistance() > n.getNoDistance() + n.getWeightBetween(m)) {
+                            m.setPredecessor(n);
+                            m.setHop(n.getNoDistance() + n.getWeightBetween(m));
+                            if (closed_lst.contains(m)) {
+                                closed_lst.remove(m);
+                                open_lst.add(m);
+                            }
                         }
                     }
                 }
             }
+            if (n == null) {
+                System.out.println("No possible route found");
+                return;
+            }
+            if (n == end) {
+                ArrayList<Node> path = new ArrayList<>();
+                while (n.getPredecessor() != n) {
+                    n.setPath(null, n.getPredecessor());
+                    path.add(n);
+                    n = n.getPredecessor();
+                }
+                path.add(start);
+                for (int i = path.size() - 1; i >= 0; --i)
+                    System.out.println("Path " + path.get(i).getDesc());
+                return;
+            }
+
+            open_lst.remove(n);
+            closed_lst.add(n);
         }
         /*
         nodes.forEach(n -> n.setTarget(end));
@@ -115,6 +139,7 @@ public class NodeManagement implements Serializable {
                 activator = false;
         }
         */
+        /*
         String path = "";
         Node pre = end.getPredecessor();
         Node oldPre = end;
@@ -134,6 +159,7 @@ public class NodeManagement implements Serializable {
             i--;
         }
         System.out.println("------");
+         */
     }
     
     private Node findLowestHop() {
