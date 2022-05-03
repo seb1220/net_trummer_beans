@@ -68,7 +68,7 @@ public class DrawPanel extends javax.swing.JPanel {
         if (evt.getButton() == MouseEvent.BUTTON1) {
             nm.add(evt.getX(), evt.getY());
             repaint();
-
+            /*
             if ((evt.getModifiersEx() & MouseEvent.CTRL_DOWN_MASK) == 128 && nm.isInNode(evt.getX(), evt.getY()) != null) {
                 moving = nm.isInNode(evt.getX(), evt.getY());
                 x = evt.getX();
@@ -81,20 +81,7 @@ public class DrawPanel extends javax.swing.JPanel {
                 moving = null;
                 connecting = null;
             }
-        } else {
-            if (nm.isInNode(evt.getX(), evt.getY()) != null)
-                if (nm.isInNode(evt.getX(), evt.getY()).isSelected()) {
-                    nm.isInNode(evt.getX(), evt.getY()).setSelected(false);
-                    nm.clearEnt();
-                } else if (nm.getSelectedNodes().size() < 2) {
-                    nm.isInNode(evt.getX(), evt.getY()).setSelected(true);
-                }
-            //nm.getSelectedNodes().forEach(n -> System.out.println(n.getDesc()));
-            //System.out.println("Size: " + nm.getSelectedNodes().size());
-            
-            if (nm.getSelectedNodes().size() == 2) {
-                nm.findPath(nm.getSelectedNodes().get(0), nm.getSelectedNodes().get(1));
-            }
+             */
         }
     }//GEN-LAST:event_formMousePressed
 
@@ -114,6 +101,7 @@ public class DrawPanel extends javax.swing.JPanel {
 
     private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
         // TODO add your handling code here:
+        /*
         if (connecting != null && nm.isInNode(evt.getX(), evt.getY()) != null && connecting != nm.isInNode(evt.getX(), evt.getY())) {
             connecting.addNb(nm.isInNode(evt.getX(), evt.getY()));
             nm.isInNode(evt.getX(), evt.getY()).addNb(connecting);
@@ -121,7 +109,7 @@ public class DrawPanel extends javax.swing.JPanel {
             if (nm.getSelectedNodes().size() == 2) {
                 nm.findPath(nm.getSelectedNodes().get(0), nm.getSelectedNodes().get(1));
             }
-        }
+        }*/
             
         connecting = null;
         moving = null;
