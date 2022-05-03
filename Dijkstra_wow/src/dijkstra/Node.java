@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Comparator;
-
+/*
 private int hop;
     private Node predecessor;
     private boolean active;
@@ -21,7 +21,7 @@ private int hop;
         setActive(false);
         setPath(null);
     }
-
+*/
 /**
  *
  * @author sebas
