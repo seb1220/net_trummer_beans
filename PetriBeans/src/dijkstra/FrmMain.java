@@ -30,12 +30,17 @@ public class FrmMain extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        bgItem = new javax.swing.ButtonGroup();
         drawPanal1 = new dijkstra.DrawPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         miSave = new javax.swing.JMenuItem();
         miLoad = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        miPaint = new javax.swing.JMenu();
+        rbmiPoint = new javax.swing.JRadioButtonMenuItem();
+        mTransition = new javax.swing.JMenu();
+        rbmiVertical = new javax.swing.JRadioButtonMenuItem();
+        rbmiHorizontal = new javax.swing.JRadioButtonMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(600, 600));
@@ -71,8 +76,41 @@ public class FrmMain extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        miPaint.setText("Item");
+
+        bgItem.add(rbmiPoint);
+        rbmiPoint.setSelected(true);
+        rbmiPoint.setText("Point");
+        rbmiPoint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbmiPointActionPerformed(evt);
+            }
+        });
+        miPaint.add(rbmiPoint);
+
+        mTransition.setText("Transition");
+
+        bgItem.add(rbmiVertical);
+        rbmiVertical.setText("Vertical");
+        rbmiVertical.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbmiVerticalActionPerformed(evt);
+            }
+        });
+        mTransition.add(rbmiVertical);
+
+        bgItem.add(rbmiHorizontal);
+        rbmiHorizontal.setText("Horizontal");
+        rbmiHorizontal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbmiHorizontalActionPerformed(evt);
+            }
+        });
+        mTransition.add(rbmiHorizontal);
+
+        miPaint.add(mTransition);
+
+        jMenuBar1.add(miPaint);
 
         setJMenuBar(jMenuBar1);
 
@@ -103,6 +141,24 @@ public class FrmMain extends javax.swing.JFrame {
         // TODO add your handling code here:
         drawPanal1.load();
     }//GEN-LAST:event_miLoadActionPerformed
+
+    private void rbmiPointActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbmiPointActionPerformed
+        // TODO add your handling code here:
+        if (rbmiPoint.isSelected())
+            NodeManagement.selectedItem = 0;
+    }//GEN-LAST:event_rbmiPointActionPerformed
+
+    private void rbmiVerticalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbmiVerticalActionPerformed
+        // TODO add your handling code here:
+        if (rbmiVertical.isSelected())
+            NodeManagement.selectedItem = 1;
+    }//GEN-LAST:event_rbmiVerticalActionPerformed
+
+    private void rbmiHorizontalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbmiHorizontalActionPerformed
+        // TODO add your handling code here:
+        if (rbmiHorizontal.isSelected())
+            NodeManagement.selectedItem = 2;
+    }//GEN-LAST:event_rbmiHorizontalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -140,11 +196,16 @@ public class FrmMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup bgItem;
     private dijkstra.DrawPanel drawPanal1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu mTransition;
     private javax.swing.JMenuItem miLoad;
+    private javax.swing.JMenu miPaint;
     private javax.swing.JMenuItem miSave;
+    private javax.swing.JRadioButtonMenuItem rbmiHorizontal;
+    private javax.swing.JRadioButtonMenuItem rbmiPoint;
+    private javax.swing.JRadioButtonMenuItem rbmiVertical;
     // End of variables declaration//GEN-END:variables
 }

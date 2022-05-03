@@ -18,6 +18,7 @@ public class NodeManagement implements Serializable {
     static final public int RADIUS = 30;
     static final public int WIDTH = 10;
     static final public int HEIGHT = 40;
+    static public int selectedItem = 0;
 
     public NodeManagement() {
         nodes = new ArrayList<Node>();
@@ -26,7 +27,18 @@ public class NodeManagement implements Serializable {
     public void add (int x, int y) {
         if (!isNearNode(x, y))
             //nodes.add(new Point(x, y, RADIUS));
-            nodes.add(new Transition(x, y, WIDTH, HEIGHT, true));
+            switch (selectedItem) {
+                case 0:
+                    nodes.add(new Point(x, y, RADIUS));
+                    break;
+                case 1:
+                    nodes.add(new Transition(x, y, WIDTH, HEIGHT, true));
+                    break;
+                case 2:
+                    nodes.add(new Transition(x, y, WIDTH, HEIGHT, false));
+                    break;
+            }
+            
     }
     
     public boolean isNearNode(int x, int y) {
