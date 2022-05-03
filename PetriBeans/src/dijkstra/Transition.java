@@ -51,7 +51,6 @@ public class Transition extends Node {
 
     @Override
     boolean isInNode(int x, int y) {
-        System.out.println("ajjaaj " + (x > getX() - getWidth() / 2 && x < getX() + getWidth() / 2));
         return x > getX() - getWidth() / 2 && x < getX() + getWidth() / 2 && y > getY() - getHeight() / 2 && y < getY() + getHeight() / 2;
     }
 }
