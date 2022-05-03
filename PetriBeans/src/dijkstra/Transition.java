@@ -14,11 +14,17 @@ public class Transition extends Node {
     }
 
     public int getWidth() {
-        return width;
+        if (isVertical())
+            return width;
+        else
+            return height;
     }
 
     public int getHeight() {
-        return height;
+        if (isVertical())
+            return height;
+        else
+            return width;
     }
 
     public boolean isVertical() {
@@ -40,14 +46,12 @@ public class Transition extends Node {
     @Override
     void paint(Graphics g) {
         g.setColor(Color.BLACK);
-        if (vertical)
-            g.fillRect(getX() - width / 2, getY() - height / 2, width, height);
-        else
-            g.fillRect(getX() - height / 2, getY() - width / 2, height, width);
+        g.fillRect(getX() - getWidth() / 2, getY() - getHeight() / 2, getWidth(), getHeight());
     }
 
     @Override
-    boolean isInNode(Node n) {
-        return false;
+    boolean isInNode(int x, int y) {
+        System.out.println("ajjaaj " + (x > getX() - getWidth() / 2 && x < getX() + getWidth() / 2));
+        return x > getX() - getWidth() / 2 && x < getX() + getWidth() / 2 && y > getY() - getHeight() / 2 && y < getY() + getHeight() / 2;
     }
 }

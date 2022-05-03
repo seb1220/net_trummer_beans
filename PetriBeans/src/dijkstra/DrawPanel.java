@@ -68,7 +68,7 @@ public class DrawPanel extends javax.swing.JPanel {
         if (evt.getButton() == MouseEvent.BUTTON1) {
             nm.add(evt.getX(), evt.getY());
             repaint();
-            /*
+
             if ((evt.getModifiersEx() & MouseEvent.CTRL_DOWN_MASK) == 128 && nm.isInNode(evt.getX(), evt.getY()) != null) {
                 moving = nm.isInNode(evt.getX(), evt.getY());
                 x = evt.getX();
@@ -81,8 +81,8 @@ public class DrawPanel extends javax.swing.JPanel {
                 moving = null;
                 connecting = null;
             }
-             */
         }
+        System.out.println("moving " + moving);
     }//GEN-LAST:event_formMousePressed
 
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged

@@ -20,12 +20,12 @@ public class Point extends Node {
     @Override
     void paint(Graphics g) {
         g.setColor(Color.BLACK);
-        g.drawOval(getX() - radius / 2, getY() - radius / 2, radius, radius);
+        g.drawOval(getX() - radius, getY() - radius, radius * 2, radius * 2);
     }
 
     @Override
-    boolean isInNode(Node n) {
-        return false;
+    boolean isInNode(int x, int y) {
+        return getRadius() * 1.0 > Math.hypot(getX() - x, getY() - y);
     }
 
 }

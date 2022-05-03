@@ -15,10 +15,10 @@ import java.util.Comparator;
  */
 public class NodeManagement implements Serializable {
     private ArrayList<Node> nodes;
-    static final public int RADIUS = 30;
-    static final public int WIDTH = 10;
-    static final public int HEIGHT = 40;
-    static public int selectedItem = 0;
+    public static final int RADIUS = 20;
+    public static final int WIDTH = 10;
+    public static final int HEIGHT = 40;
+    public static int selectedItem = 0;
 
     public NodeManagement() {
         nodes = new ArrayList<Node>();
@@ -26,7 +26,6 @@ public class NodeManagement implements Serializable {
     
     public void add (int x, int y) {
         if (!isNearNode(x, y))
-            //nodes.add(new Point(x, y, RADIUS));
             switch (selectedItem) {
                 case 0:
                     nodes.add(new Point(x, y, RADIUS));
@@ -45,14 +44,13 @@ public class NodeManagement implements Serializable {
         return nodes.stream().anyMatch(n -> n.isNearNode(x, y) );
     }
 
-    /*
     public Node isInNode(int x, int y) {
         return nodes.stream()
                 .filter(n -> n.isInNode(x, y))
                 .findFirst()
                 .orElse(null);
                 //.get();
-    }*/
+    }
     
     public void paint(Graphics g) {
         nodes.forEach(n -> n.paint(g));

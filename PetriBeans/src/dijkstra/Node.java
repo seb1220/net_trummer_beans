@@ -16,7 +16,7 @@ import java.util.Comparator;
  * @author sebas
  */
 public abstract class Node implements Serializable {
-    public static final int RADIUS = 20;
+    //public static final int RADIUS = 20;
     
     private int x;
     private int y;
@@ -49,10 +49,10 @@ public abstract class Node implements Serializable {
         setY(getY() + dy);
     }
     
-    abstract boolean isInNode(Node n);
+    abstract boolean isInNode(int x, int y);
     
     public boolean isNearNode(int x, int y) {
-        return NodeManagement.RADIUS * 1.5 > Math.hypot(getX() - x, getY() - y);
+        return NodeManagement.RADIUS * 3 > Math.hypot(getX() - x, getY() - y);
     }
 
 }
