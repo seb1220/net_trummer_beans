@@ -28,7 +28,7 @@ public class NodeManagement implements Serializable {
         if (!isNearNode(x, y))
             switch (selectedItem) {
                 case 0:
-                    nodes.add(new Point(x, y, RADIUS));
+                    nodes.add(new Point(x, y, RADIUS, 0));
                     break;
                 case 1:
                     nodes.add(new Transition(x, y, WIDTH, HEIGHT, true));
@@ -37,7 +37,6 @@ public class NodeManagement implements Serializable {
                     nodes.add(new Transition(x, y, WIDTH, HEIGHT, false));
                     break;
             }
-            
     }
     
     public boolean isNearNode(int x, int y) {
@@ -53,6 +52,9 @@ public class NodeManagement implements Serializable {
     }
     
     public void paint(Graphics g) {
-        nodes.forEach(n -> n.paint(g));
+        nodes.stream().filter(n -> n.getClass() == Transition.class)
+                .forEach(n -> n.paint(g));
+        nodes.stream().filter(n -> n.getClass() == Point.class)
+                .forEach(n -> n.paint(g));
     }
 }

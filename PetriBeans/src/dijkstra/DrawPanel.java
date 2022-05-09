@@ -7,6 +7,7 @@ package dijkstra;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.io.PipedOutputStream;
 
 /**
  *
@@ -65,24 +66,23 @@ public class DrawPanel extends javax.swing.JPanel {
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
         // TODO add your handling code here:
-        if (evt.getButton() == MouseEvent.BUTTON1) {
-            nm.add(evt.getX(), evt.getY());
-            repaint();
+        nm.add(evt.getX(), evt.getY());
+        repaint();
 
-            if ((evt.getModifiersEx() & MouseEvent.CTRL_DOWN_MASK) == 128 && nm.isInNode(evt.getX(), evt.getY()) != null) {
-                moving = nm.isInNode(evt.getX(), evt.getY());
-                x = evt.getX();
-                y = evt.getY();
-            } else if (nm.isInNode(evt.getX(), evt.getY()) != null) {
-                connecting = nm.isInNode(evt.getX(), evt.getY());
-                x = evt.getX();
-                y = evt.getY();
-            } else {
-                moving = null;
-                connecting = null;
-            }
+        if ((evt.getModifiersEx() & MouseEvent.CTRL_DOWN_MASK) == 128 && nm.isInNode(evt.getX(), evt.getY()) != null) {
+            moving = nm.isInNode(evt.getX(), evt.getY());
+            x = evt.getX();
+            y = evt.getY();
+        } else if (nm.isInNode(evt.getX(), evt.getY()) != null) {
+            connecting = nm.isInNode(evt.getX(), evt.getY());
+            x = evt.getX();
+            y = evt.getY();
+        } else {
+            moving = null;
+            connecting = null;
         }
-        System.out.println("moving " + moving);
+
+        //System.out.println("moving " + moving);
     }//GEN-LAST:event_formMousePressed
 
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
@@ -101,16 +101,22 @@ public class DrawPanel extends javax.swing.JPanel {
 
     private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
         // TODO add your handling code here:
-        /*
-        if (connecting != null && nm.isInNode(evt.getX(), evt.getY()) != null && connecting != nm.isInNode(evt.getX(), evt.getY())) {
-            connecting.addNb(nm.isInNode(evt.getX(), evt.getY()));
-            nm.isInNode(evt.getX(), evt.getY()).addNb(connecting);
-            nm.clearEnt();
-            if (nm.getSelectedNodes().size() == 2) {
-                nm.findPath(nm.getSelectedNodes().get(0), nm.getSelectedNodes().get(1));
-            }
-        }*/
-            
+
+        if (connecting != null && nm.isInNode(evt.getX(), evt.getY()) != null && connecting.getClass() != nm.isInNode(evt.getX(), evt.getY()).getClass()) {
+            if (connecting.getClass() == Transition.class)
+                ((Transition) connecting).addSuc((Point) nm.isInNode(evt.getX(), evt.getY()));
+
+            if (nm.isInNode(evt.getX(), evt.getY()).getClass() == Transition.class)
+                ((Transition) nm.isInNode(evt.getX(), evt.getY())).addPre((Point) connecting);
+        } else if (connecting != null && connecting == nm.isInNode(evt.getX(), evt.getY()) && connecting.getClass() == Point.class) {
+            if (evt.getButton() == MouseEvent.BUTTON1)
+                ((Point) connecting).addToken();
+            else
+                ((Point) connecting).rmToken();
+        } else if (connecting != null && connecting == nm.isInNode(evt.getX(), evt.getY()) && connecting.getClass() == Transition.class) {
+            ((Transition) connecting).fire();
+        }
+
         connecting = null;
         moving = null;
         repaint();
