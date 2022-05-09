@@ -4,10 +4,13 @@
  */
 package dijkstra;
 
+import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
-import java.io.PipedOutputStream;
+import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -131,16 +134,66 @@ public class DrawPanel extends javax.swing.JPanel {
     }
     
     public void save() throws IOException {
-        /*
-        OutputStream fos = Files.newOutputStream(Paths.get("nodes.ser"));
-        ObjectOutputStream oos = new ObjectOutputStream(fos) {
-            oos.writeObject(nm);
+        JFileChooser fc = new JFileChooser();
+
+        fc.setFileFilter(new FileFilter(){
+            @Override
+            public boolean accept(File file) {
+                return file.getName().endsWith(".pn") || file.isDirectory();
+            }
+
+            @Override
+            public String getDescription() {
+                return "Petri-Net File";
+            }
+
+        });
+
+        if (fc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+            try {
+                ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fc.getSelectedFile()));
+                out.writeObject(nm);
+                out.close();
+
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(DrawPanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
-        */
     }
-    
+
     public void load() {
-        
+        JFileChooser fc = new JFileChooser();
+
+        fc.setFileFilter(new FileFilter(){
+            @Override
+            public boolean accept(File file) {
+                return file.getName().endsWith(".pn") || file.isDirectory();
+            }
+
+            @Override
+            public String getDescription() {
+                return "Petri-Net File";
+            }
+
+        });
+
+        if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            try {
+                ObjectInputStream in = new ObjectInputStream(new FileInputStream(fc.getSelectedFile().getAbsolutePath()));
+
+                nm = ((NodeManagement) in.readObject());
+                in.close();
+
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(DrawPanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
