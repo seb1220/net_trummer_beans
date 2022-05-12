@@ -151,6 +151,9 @@ public class DrawPanel extends javax.swing.JPanel {
 
         if (fc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
             try {
+                if (!fc.getSelectedFile().getName().endsWith(".pn")){
+                    fc.setSelectedFile(new File(fc.getSelectedFile().getAbsolutePath() + ".pn"));
+                }
                 ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fc.getSelectedFile()));
                 out.writeObject(nm);
                 out.close();
@@ -184,6 +187,7 @@ public class DrawPanel extends javax.swing.JPanel {
                 ObjectInputStream in = new ObjectInputStream(new FileInputStream(fc.getSelectedFile().getAbsolutePath()));
 
                 nm = ((NodeManagement) in.readObject());
+                repaint();
                 in.close();
 
             } catch (FileNotFoundException ex) {
