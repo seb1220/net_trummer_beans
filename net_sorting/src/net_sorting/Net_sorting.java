@@ -15,6 +15,15 @@ public class Net_sorting {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        System.out.println("Beans riechen nicht gut");
+
+        Algorithms algie = new Algorithms();
+
+        algie.generateRandoms(50, 80, 10, true);
+        algie.print();
+
+        algie.BubbleSort();
+        algie.print();
     }
     
 }
