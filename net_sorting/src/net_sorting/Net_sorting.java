@@ -24,7 +24,8 @@ public class Net_sorting {
         algie.print();
 
         //algie.BubbleSort();
-        algie.QuickSort();
+        //algie.QuickSort();
+        algie.HeapSort();
 
         algie.print();
     }

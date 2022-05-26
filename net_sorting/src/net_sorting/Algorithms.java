@@ -119,5 +119,26 @@ public class Algorithms {
 
     public void HeapSort() {
         //lol
+        for (int i = 0; i < array.length; ++i) {
+            for (int j = array.length-1; j >= 0; --j)
+                heapify(j, array.length-i);
+            swap(0, array.length-1-i);
+        }
+    }
+
+    private void heapify(int i, int length) {
+        if (i * 2 + 1 > length - 1)
+            return;
+
+        if (array[i * 2 + 1] > array[i])
+            swap(i * 2 + 1, i);
+        heapify(i * 2 + 1, length);
+
+        if (i * 2 + 2 > length - 1)
+            return;
+
+        if (array[i * 2 + 2] > array[i])
+            swap(i * 2 + 2, i);
+        heapify(i * 2 + 2, length);
     }
 }
