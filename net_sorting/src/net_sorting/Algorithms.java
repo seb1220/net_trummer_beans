@@ -1,6 +1,5 @@
 package net_sorting;
 
-import javax.xml.crypto.dsig.spec.HMACParameterSpec;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -102,7 +101,6 @@ public class Algorithms {
         max += (maxFixed ? 0 : 1);
 
         int pivotIndex;
-
         max += (array[max] > pivot ? 0 : 1);
         swap(max, initMax+1);
         pivotIndex = max-1;
@@ -118,6 +116,8 @@ public class Algorithms {
         array[i] = array[j];
         array[j] = tmp;
     }
+
+    public void HeapSort() {
+        //lol
+    }
 }
-
-
