@@ -5,7 +5,7 @@
 package net_sorting;
 
 /**
- *
+ * Nothing interesting.
  * @author sebas
  */
 public class Net_sorting {
