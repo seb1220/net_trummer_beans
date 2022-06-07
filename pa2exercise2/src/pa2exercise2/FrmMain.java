@@ -4,6 +4,10 @@
  */
 package pa2exercise2;
 
+import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import java.io.File;
+
 /**
  *
  * @author sebas
@@ -133,27 +137,57 @@ public class FrmMain extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void miNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miNewActionPerformed
-        // TODO add your handling code here:
+        drawPanel1.miNew();
     }//GEN-LAST:event_miNewActionPerformed
 
     private void miOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miOpenActionPerformed
-        // TODO add your handling code here:
+        JFileChooser fc = new JFileChooser();
+        fc.setFileFilter(new FileFilter() {
+            @Override
+            public boolean accept(File f) {
+                return f.isDirectory() || f.getAbsolutePath().endsWith(".cool");
+            }
+
+            @Override
+            public String getDescription() {
+                return "very COOL file (.cool)";
+            }
+        });
+
+        if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            drawPanel1.miOpen(fc.getSelectedFile().getAbsolutePath());
+        }
     }//GEN-LAST:event_miOpenActionPerformed
 
     private void miSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSaveActionPerformed
-        // TODO add your handling code here:
+        JFileChooser fc = new JFileChooser();
+        fc.setFileFilter(new FileFilter() {
+            @Override
+            public boolean accept(File f) {
+                return f.isDirectory() || f.getAbsolutePath().endsWith(".cool");
+            }
+
+            @Override
+            public String getDescription() {
+                return "very COOL file (.cool)";
+            }
+        });
+
+        if (fc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+            drawPanel1.miSave(fc.getSelectedFile().getAbsolutePath());
+        }
     }//GEN-LAST:event_miSaveActionPerformed
 
     private void mitExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitExitActionPerformed
-        // TODO add your handling code here:
+        drawPanel1.miExit();
     }//GEN-LAST:event_mitExitActionPerformed
 
     private void rbmiRectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbmiRectActionPerformed
-        // TODO add your handling code here:
+        drawPanel1.changeType(DrawPanel.RECTANGLE);
     }//GEN-LAST:event_rbmiRectActionPerformed
 
     private void rbmiLineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbmiLineActionPerformed
-        // TODO add your handling code here:
+        drawPanel1.changeType(DrawPanel.LINE);
     }//GEN-LAST:event_rbmiLineActionPerformed
 
     /**
